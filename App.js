@@ -14,8 +14,8 @@ function App() {
         
       } />
       <Message
-      messageProps={'Another random msg'}
-      />
+      msgProps={'Another random msg'}>
+      </Message>
     </div>
   );
 }
