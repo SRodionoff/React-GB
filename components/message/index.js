@@ -1,20 +1,48 @@
 import React from 'react';
-import styles from './message.module.css';
+import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import ListItem from '@mui/material/ListItem';
+
+const useStyles = makeStyles({
+   listWrap: {
+      display: "grid",
+      gridTemplateColums: "200px 1fr",
+   }
+});
 
 
 export const MessageList = () => {
    const [messageList, setMessageList] = useState([]);
    const [value, setValue] = useState(" ");
+   const ChatList = [
+      {
+         name: "Person 1",
+         id: "1"
+      },
+      {
+         name: "Person 2",
+         id: "2"
+      },
+      {
+         name: "Person 3",
+         id: "3"
+      },
+      {
+         name: "Person 4",
+         id: "4"
+      }
+   ];
+   const classes = useStyles();
 
    const sendMessage = (author, text) => {
-      const newMessageList = [...messageList];
       const newMessage = {
          author,
          text
       };
-      newMessageList.push(newMessage);
-      setMessageList(newMessageList);
+      setMessageList((prevState) => [...prevState, newMessage]);
+      setValue("");
    };
 
    const resetForm = () => {
@@ -42,23 +70,31 @@ export const MessageList = () => {
    return (
       <div className="App-forma">
          <form onSubmit={onSubmitMessage}>
-            <input
+            <TextField
                onChange={onChangeMessageInput}
-               placeholder="type message"
+               placeholder="Text me"
                value={value}
                type="text"
+               autoFocus={true}
             />
-            <button>send</button>
-         </form>
+            <div>
+               <Button type="submit">Send</Button>
+            </div>
+         </form >
          <ul>
             {
                messageList.map((item, index) => (
                   <li key={index}>
-                     {item.author} - {item.text}
+                     {item.author}: {item.text}
                   </li>
                ))
             }
          </ul>
-      </div>
+         <div className='listWrap'>
+            {ChatList.map((item, index) => {
+               return <ListItem key={index}>{item.name}</ListItem>
+            })}
+         </div>
+      </div >
    );
 };
