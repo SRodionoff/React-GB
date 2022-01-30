@@ -3,11 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ChatList } from "./ChatList";
 import { MessageInput } from "./MessageInput";
 import { MessageList } from "./MessageList";
-import { BrowserRouter, Switch, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import { AppBar, Toolbar, Button } from "@material-ui/core";
 import { Home } from "../routes/Home";
 import { Chats } from "../routes/Chats";
 import { Profile } from "../routes/Profile";
+import { Messages } from "../routes/Messages";
 
 
 const useStyles = makeStyles({
@@ -35,11 +36,12 @@ export const Format = () => {
                         </Button>
                     </Toolbar>
                 </AppBar>
-                <Routes>
-                    <Route element={<Chats />} path="/chats" />
-                    <Route element={<Profile />} path="/profile" />
-                    <Route element={<Home />} path="/" />
-                </Routes>
+                <Switch>
+                    <Route exact component={Chats} path="/chats" />
+                    <Route exact component={Messages} path="/chats/:chatId" />
+                    <Route exact component={Profile} path="/profile" />
+                    <Route exact component={Home} path="/" />
+                </Switch>
             </BrowserRouter>
         </div>
     );

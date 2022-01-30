@@ -1,4 +1,4 @@
-import {ListItem, ListItemText} from "@material-ui/core";
+import { ListItem, ListItemText } from "@material-ui/core";
 import propTypes from "prop-types";
 
 export const Message = (props) => {
@@ -12,7 +12,7 @@ export const Message = (props) => {
 };
 
 Message.propTypes = {
-    id:propTypes.string,
+    id: propTypes.string,
     text: propTypes.string,
     author: propTypes.string
 };
