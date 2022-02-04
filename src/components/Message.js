@@ -5,7 +5,7 @@ export const Message = (props) => {
     return (
         <ListItem>
             <ListItemText>
-                [{props.author}]: {props.text}
+                [{props.author}]:{props.text}
             </ListItemText>
         </ListItem>
     );
