@@ -5,10 +5,15 @@ import { AppBar, Toolbar, Button } from "@material-ui/core";
 import { Home } from "../routes/Home";
 import { Chats } from "../routes/Chats";
 import { Profile } from "../routes/Profile";
+import {LoginRoute} from "../routes/login";
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../store';
 import { Provider } from 'react-redux';
 import { FetchReqres } from "../routes/reqres/";
+import { MiddlewareReqRes } from "../routes/reqres/middleware"
+import { useDispatch, useSelector } from "react-redux";
+import { getIsAuth, initAuthAction } from "../store/user/reducer";
+import { useEffect } from "react";
 
 
 const useStyles = makeStyles({
@@ -19,7 +24,7 @@ const useStyles = makeStyles({
 });
 
 export const Format = () => {
-    return (
+        return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <BrowserRouter>
@@ -35,16 +40,27 @@ export const Format = () => {
                             <Button to="/Chats" component={Link} color="inherit">
                                 Chats
                             </Button>
-                            <Button to="/reqres/middleware" component={Link} color="inherit">
+                            <Button to="/login" component={Link} color="inherit">
+                                Chats
+                            </Button>
+                            <Button to="/reqres" component={Link} color="inherit">
                                 Reqres
                             </Button>
+                            <Button to="/reqres/middleware" component={Link} color="inherit">
+                                MiddlewareReqRes
+                            </Button>
+
                         </Toolbar>
                     </AppBar>
                     <Switch>
                         <Route exact component={Chats} path="/chats" />
                         <Route exact component={Profile} path="/profile" />
                         <Route exact component={Home} path="/" />
+                        <Route exact component={LoginRoute} path="/login" />
                         <Route path="/reqres/middleware">
+                            <MiddlewareReqRes />
+                        </Route>
+                        <Route path="/reqres">
                             <FetchReqres />
                         </Route>
                     </Switch>
